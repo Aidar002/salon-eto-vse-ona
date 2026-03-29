@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Это Всё Она — Бьюти-бутик | Самара</title>
+<meta name="description" content="Это Всё Она — салон красоты в формате бьюти-бутик в Самаре. Маникюр, педикюр, окрашивание, макияж, оформление бровей. Премиум материалы и атмосфера роскоши.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,700&family=Raleway:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0a0a0a;
+  --bg2:#111111;
+  --gold:#c9a76c;
+  --gold2:#e0c992;
+  --gold3:#a07840;
+  --cream:#f5efe6;
+  --muted:#7a7068;
+  --line:rgba(201,167,108,.12);
+}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:var(--bg);color:var(--cream);font-family:'Raleway',sans-serif;overflow-x:hidden}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--gold3);border-radius:3px}
+
+/* ── NOISE ── */
+.noise{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ── LEAF DECORATIONS (SVG botanical lines) ── */
+.leaf-deco{position:absolute;pointer-events:none;z-index:0}
+.leaf-deco svg{width:100%;height:100%}
+.leaf-deco path{fill:none;stroke:var(--gold3);stroke-width:.8;opacity:.25}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 4vw;display:flex;justify-content:space-between;align-items:center;transition:background .5s,backdrop-filter .5s}
+nav.scrolled{background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--line)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);text-decoration:none;transition:opacity .3s}
+.nav-logo:hover{opacity:.7}
+.nav-links{display:flex;gap:2.2rem}
+.nav-links a{font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;color:rgba(245,239,230,.4);text-decoration:none;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-cta{font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;padding:.65rem 1.8rem;border:1px solid var(--gold);color:var(--gold);text-decoration:none;transition:all .35s}
+.nav-cta:hover{background:var(--gold);color:var(--bg)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;z-index:2;text-align:center}
+.hero::before{content:'';position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 50% at 50% 45%,rgba(201,167,108,.06) 0%,transparent 70%),
+  radial-gradient(ellipse 40% 60% at 15% 80%,rgba(201,167,108,.04) 0%,transparent 50%),
+  radial-gradient(ellipse 40% 60% at 85% 80%,rgba(201,167,108,.04) 0%,transparent 50%);z-index:1}
+
+/* Botanical SVG background lines */
+.hero-botanical{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-botanical .leaf{position:absolute;opacity:.15;animation:leafSway 12s ease-in-out infinite}
+.hero-botanical .leaf:nth-child(1){left:-5%;top:-10%;width:45%;transform:rotate(-15deg);animation-delay:0s}
+.hero-botanical .leaf:nth-child(2){right:-5%;top:-10%;width:45%;transform:rotate(15deg) scaleX(-1);animation-delay:3s}
+.hero-botanical .leaf:nth-child(3){left:-8%;bottom:-15%;width:40%;transform:rotate(25deg);animation-delay:6s}
+.hero-botanical .leaf:nth-child(4){right:-8%;bottom:-15%;width:40%;transform:rotate(-25deg) scaleX(-1);animation-delay:9s}
+@keyframes leafSway{0%,100%{transform:rotate(var(--r,0deg)) scaleX(var(--sx,1)) translateY(0)}50%{transform:rotate(var(--r,0deg)) scaleX(var(--sx,1)) translateY(-12px)}}
+
+.hero-content{position:relative;z-index:3;padding:0 2rem;max-width:800px}
+
+.hero-frame{display:inline-block;position:relative;padding:3rem 4rem;margin-bottom:0}
+.hero-frame::before,.hero-frame::after{content:'';position:absolute;border:1px solid rgba(201,167,108,.25)}
+.hero-frame::before{top:0;right:0;bottom:30%;left:40%;border-left:none;border-bottom:none}
+.hero-frame::after{bottom:0;left:0;top:30%;right:40%;border-right:none;border-top:none}
+
+.hero-branch{position:absolute;top:-1.5rem;right:-1rem;width:80px;opacity:.6}
+.hero-branch svg{width:100%}
+.hero-branch path{fill:none;stroke:var(--cream);stroke-width:1.2}
+
+.h-pre{font-size:.55rem;font-weight:400;letter-spacing:.8em;text-transform:uppercase;color:var(--gold);opacity:0;animation:fadeUp .8s .3s forwards;margin-bottom:1.5rem}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(3rem,7vw,5.5rem);line-height:1;letter-spacing:.08em;text-transform:uppercase;color:var(--cream);opacity:0;animation:fadeUp 1s .5s forwards}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,2.5vw,1.4rem);font-weight:400;color:rgba(201,167,108,.7);letter-spacing:.15em;margin-top:.6rem;opacity:0;animation:fadeUp .8s .8s forwards}
+.hero-desc{margin-top:2.5rem;font-size:.88rem;font-weight:300;color:rgba(245,239,230,.45);line-height:2;max-width:500px;margin-left:auto;margin-right:auto;opacity:0;animation:fadeUp .8s 1s forwards}
+.hero-btns{margin-top:2.5rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1.2s forwards}
+
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+[class*="fadeUp"],
+.h-pre,.hero-h1,.hero-sub,.hero-desc,.hero-btns{transform:translateY(20px)}
+
+/* Scroll indicator */
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fadeUp .8s 1.5s forwards}
+.hero-scroll span{font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;color:var(--muted)}
+.scroll-line{width:1px;height:35px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+/* BTNS */
+.btn{font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;padding:.9rem 2rem;transition:all .35s;display:inline-block}
+.btn-gold{background:linear-gradient(135deg,var(--gold3),var(--gold));color:var(--bg);border:1px solid var(--gold)}
+.btn-gold:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(201,167,108,.25)}
+.btn-ghost{background:transparent;color:var(--cream);border:1px solid rgba(245,239,230,.15)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-3px)}
+
+/* ── TICKER ── */
+.ticker{background:rgba(201,167,108,.06);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:.7rem 0;overflow:hidden;position:relative;z-index:2}
+.ticker-track{display:flex;animation:tick 35s linear infinite;white-space:nowrap}
+.tick-item{font-size:.55rem;font-weight:400;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,167,108,.5);padding:0 2rem;flex-shrink:0;display:flex;align-items:center;gap:2rem}
+.tick-dot{width:3px;height:3px;background:var(--gold);border-radius:50%;opacity:.5}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── ATMOSPHERE SECTION ── */
+.atmo-section{padding:8rem 4vw;position:relative;z-index:2}
+.atmo-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.atmo-visual{position:relative}
+.atmo-img{width:100%;aspect-ratio:.85;background:linear-gradient(135deg,var(--bg2),rgba(201,167,108,.08));border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.atmo-img::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 30%,rgba(201,167,108,.06),transparent 60%)}
+.atmo-emoji{font-size:6rem;filter:drop-shadow(0 15px 30px rgba(0,0,0,.5));animation:emojiFloat 5s ease-in-out infinite}
+@keyframes emojiFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(2deg)}}
+.atmo-badge{position:absolute;right:-1.5rem;bottom:2.5rem;background:var(--gold);color:var(--bg);padding:1rem 1.3rem;z-index:3}
+.atmo-badge-text{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;line-height:1.2}
+.atmo-badge-sub{font-size:.5rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;margin-top:.15rem}
+
+.sec-kicker{font-size:.55rem;font-weight:400;letter-spacing:.7em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:1rem;margin-bottom:1rem}
+.sec-kicker::before{content:'';width:25px;height:1px;background:var(--gold)}
+.sec-h{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--cream);line-height:1.1}
+.sec-h em{font-style:italic;color:var(--gold)}
+
+.atmo-text{margin-top:1.5rem;font-size:.88rem;font-weight:300;color:rgba(245,239,230,.45);line-height:2}
+.atmo-perks{list-style:none;margin-top:2rem;display:flex;flex-direction:column;gap:.8rem}
+.atmo-perk{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border:1px solid rgba(201,167,108,.06);transition:all .3s;position:relative;overflow:hidden}
+.atmo-perk::before{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(201,167,108,.04),transparent);transform:translateX(-100%);transition:transform .4s}
+.atmo-perk:hover{border-color:rgba(201,167,108,.2)}
+.atmo-perk:hover::before{transform:translateX(0)}
+.atmo-perk-icon{font-size:1.2rem;flex-shrink:0}
+.atmo-perk-text{font-size:.8rem;font-weight:300;color:rgba(245,239,230,.55);letter-spacing:.03em}
+
+/* ── SERVICES ── */
+.srv-section{padding:8rem 4vw;background:var(--bg2);position:relative;z-index:2}
+.srv-in{max-width:1100px;margin:0 auto}
+.srv-header{text-align:center;max-width:550px;margin:0 auto 4rem}
+.srv-header .sec-kicker{justify-content:center}
+.srv-header .sec-kicker::before{display:none}
+.srv-header .sec-kicker::after{content:'';width:25px;height:1px;background:var(--gold)}
+.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.srv-card{background:var(--bg);border:1px solid var(--line);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:all .4s}
+.srv-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,167,108,.04),transparent);opacity:0;transition:opacity .4s}
+.srv-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold3),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.srv-card:hover{border-color:rgba(201,167,108,.25);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.srv-card:hover::before{opacity:1}
+.srv-card:hover::after{transform:scaleX(1)}
+.srv-card-n{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:rgba(201,167,108,.06);line-height:1;margin-bottom:1rem;transition:color .3s}
+.srv-card:hover .srv-card-n{color:rgba(201,167,108,.12)}
+.srv-card-icon{font-size:1.8rem;margin-bottom:.8rem;display:block}
+.srv-card-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:var(--cream);margin-bottom:.6rem;letter-spacing:.03em}
+.srv-card-desc{font-size:.8rem;font-weight:300;color:var(--muted);line-height:1.9}
+
+/* ── BRANDS BAND ── */
+.brands-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:2rem 4vw;position:relative;z-index:2;overflow:hidden}
+.brands-track{display:flex;animation:brandScroll 25s linear infinite;white-space:nowrap}
+.brand-item{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--gold);padding:0 2.5rem;flex-shrink:0;opacity:.4;transition:opacity .3s}
+.brand-item.hl{opacity:.8}
+@keyframes brandScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── GALLERY / EXPERIENCE ── */
+.exp-section{padding:8rem 4vw;position:relative;z-index:2}
+.exp-in{max-width:1100px;margin:0 auto}
+.exp-header{text-align:center;max-width:550px;margin:0 auto 4rem}
+.exp-header .sec-kicker{justify-content:center}
+.exp-header .sec-kicker::before{display:none}
+.exp-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--line)}
+.exp-card{background:var(--bg);padding:3rem 2rem;text-align:center;transition:background .4s;position:relative;overflow:hidden}
+.exp-card:hover{background:rgba(201,167,108,.03)}
+.exp-card::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:var(--gold);transition:width .5s}
+.exp-card:hover::after{width:100%}
+.exp-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,4vw,3.5rem);font-weight:700;color:var(--gold);line-height:1}
+.exp-num .suffix{font-size:.45em;font-weight:400;color:var(--gold3)}
+.exp-label{font-size:.75rem;font-weight:300;color:var(--muted);margin-top:.6rem;line-height:1.6}
+
+/* ── TESTIMONIALS ── */
+.testi-section{padding:8rem 4vw;background:var(--bg2);position:relative;z-index:2}
+.testi-in{max-width:1100px;margin:0 auto}
+.testi-header{text-align:center;margin-bottom:4rem}
+.testi-header .sec-kicker{justify-content:center}
+.testi-header .sec-kicker::before{display:none}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.testi-card{background:var(--bg);border:1px solid var(--line);padding:2.5rem;transition:all .4s;position:relative;overflow:hidden}
+.testi-card::before{content:'\201C';position:absolute;top:.8rem;right:1.2rem;font-family:'Cormorant Garamond',serif;font-size:4rem;color:rgba(201,167,108,.07);line-height:1}
+.testi-card:hover{border-color:rgba(201,167,108,.2);transform:translateY(-4px);box-shadow:0 15px 40px rgba(0,0,0,.3)}
+.testi-stars{display:flex;gap:.25rem;margin-bottom:1.2rem}
+.tstar{color:var(--gold);font-size:.8rem}
+.testi-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.95rem;color:rgba(245,239,230,.65);line-height:1.9;margin-bottom:1.2rem}
+.testi-author{font-size:.6rem;font-weight:400;letter-spacing:.25em;text-transform:uppercase;color:var(--muted)}
+.testi-service{font-size:.6rem;color:var(--gold);margin-top:.25rem;letter-spacing:.1em}
+
+/* ── MAP / CONTACT ── */
+.contact-section{padding:8rem 4vw;position:relative;z-index:2}
+.contact-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.contact-info{}
+.contact-block{margin-top:2.5rem}
+.cb-label{font-size:.5rem;font-weight:400;letter-spacing:.6em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.cb-val{font-size:1rem;font-weight:300;color:var(--cream);line-height:1.8}
+.cb-val a{color:var(--cream);text-decoration:none;transition:color .2s}
+.cb-val a:hover{color:var(--gold)}
+.contact-socials{margin-top:2.5rem;display:flex;gap:1rem}
+.social-link{width:42px;height:42px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--muted);font-size:.75rem;font-weight:500;letter-spacing:.05em;transition:all .3s}
+.social-link:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,167,108,.05)}
+
+.contact-map{position:relative}
+.map-frame{width:100%;aspect-ratio:1;background:var(--bg2);border:1px solid var(--line);overflow:hidden}
+.map-frame iframe{width:100%;height:100%;border:0;filter:grayscale(1) invert(1) contrast(.8) brightness(.6) sepia(.3);opacity:.7;transition:opacity .3s}
+.map-frame:hover iframe{opacity:.9}
+
+/* ── CTA ── */
+.cta-section{padding:10rem 4vw;position:relative;z-index:2;text-align:center;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 50% 50%,rgba(201,167,108,.06) 0%,transparent 65%)}
+.cta-bg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Cormorant Garamond',serif;font-size:clamp(8rem,20vw,18rem);font-weight:700;font-style:italic;color:transparent;-webkit-text-stroke:1px rgba(201,167,108,.04);white-space:nowrap;pointer-events:none}
+.cta-in{position:relative;z-index:2;max-width:600px;margin:0 auto}
+.cta-kicker{font-size:.55rem;font-weight:400;letter-spacing:.7em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;justify-content:center;gap:1.5rem;margin-bottom:2rem}
+.cta-kicker::before,.cta-kicker::after{content:'';flex:1;max-width:50px;height:1px;background:var(--gold);opacity:.4}
+.cta-h{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,4rem);font-weight:700;color:var(--cream);line-height:1;margin-bottom:1.5rem}
+.cta-h em{font-style:italic;color:var(--gold)}
+.cta-p{font-size:.88rem;font-weight:300;color:rgba(245,239,230,.4);line-height:2;margin-bottom:3rem}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.cta-phone{margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--line)}
+.cta-phone-label{font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.cta-phone-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--cream);text-decoration:none;letter-spacing:.05em;transition:color .2s}
+.cta-phone-num:hover{color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{background:var(--bg2);border-top:1px solid var(--line);padding:4rem 4vw 2.5rem;position:relative;z-index:2}
+.foot-in{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem}
+.foot-brand .fl{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.foot-brand .fs{font-size:.5rem;font-weight:300;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,167,108,.4);display:block;margin-top:.2rem;margin-bottom:1rem}
+.foot-brand p{font-size:.78rem;font-weight:300;color:rgba(245,239,230,.25);line-height:1.9;font-style:italic;max-width:240px}
+.foot-col h4{font-size:.5rem;font-weight:400;letter-spacing:.5em;text-transform:uppercase;color:rgba(201,167,108,.4);margin-bottom:1rem}
+.foot-col p,.foot-col a{font-size:.78rem;font-weight:300;color:rgba(245,239,230,.3);line-height:2.2;text-decoration:none;display:block;transition:color .2s}
+.foot-col a:hover{color:var(--gold)}
+.foot-bot{max-width:1000px;margin:2.5rem auto 0;padding-top:1.5rem;border-top:1px solid rgba(245,239,230,.04);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.8rem}
+.foot-bot p{font-size:.55rem;font-weight:300;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,239,230,.12)}
+
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(25px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rl{opacity:0;transform:translateX(-25px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.rr{opacity:0;transform:translateX(25px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.r.v,.rl.v,.rr.v{opacity:1;transform:none}
+
+/* ── MOBILE MENU ── */
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px;z-index:600}
+.burger span{display:block;width:22px;height:1px;background:var(--cream);transition:all .3s}
+.burger.active span:nth-child(1){transform:rotate(45deg) translate(4px,4px)}
+.burger.active span:nth-child(2){opacity:0}
+.burger.active span:nth-child(3){transform:rotate(-45deg) translate(4px,-4px)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,10,10,.97);z-index:550;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--cream);text-decoration:none;letter-spacing:.1em;transition:color .3s}
+.mobile-menu a:hover{color:var(--gold)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){
+  .atmo-in{grid-template-columns:1fr}
+  .atmo-visual{max-width:350px}
+  .srv-grid{grid-template-columns:1fr 1fr}
+  .exp-grid{grid-template-columns:repeat(2,1fr)}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .contact-in{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-cta{display:none}
+  .burger{display:flex}
+}
+@media(max-width:640px){
+  .srv-grid{grid-template-columns:1fr}
+  .exp-grid{grid-template-columns:1fr 1fr}
+  .testi-grid{grid-template-columns:1fr}
+  .foot-in{grid-template-columns:1fr}
+  .hero-frame{padding:2rem 2.5rem}
+  nav{padding:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="noise"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Это Всё Она</a>
+  <div class="nav-links">
+    <a href="#services">Услуги</a>
+    <a href="#about">О нас</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#contacts">Контакты</a>
+  </div>
+  <a href="tel:+79276188887" class="nav-cta">Записаться</a>
+  <div class="burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#services" onclick="closeMobile()">Услуги</a>
+  <a href="#about" onclick="closeMobile()">О нас</a>
+  <a href="#reviews" onclick="closeMobile()">Отзывы</a>
+  <a href="#contacts" onclick="closeMobile()">Контакты</a>
+  <a href="tel:+79276188887" onclick="closeMobile()" style="color:var(--gold)">+7 (927) 618-88-87</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Botanical leaf decorations -->
+  <div class="hero-botanical">
+    <svg class="leaf" style="--r:-15deg;--sx:1" viewBox="0 0 400 600">
+      <path d="M350 580 C320 500 280 420 200 350 C130 290 60 260 20 180 C-10 120 10 60 50 30 C80 10 130 5 180 30 C230 55 260 100 280 160 C300 220 310 300 330 380 C345 440 355 510 350 580Z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M200 350 C220 290 250 230 280 160" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M200 350 C170 300 130 260 80 220" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M200 350 C240 330 290 320 340 330" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M50 30 C100 80 160 150 200 350" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+    <svg class="leaf" style="--r:15deg;--sx:-1" viewBox="0 0 400 600">
+      <path d="M350 580 C320 500 280 420 200 350 C130 290 60 260 20 180 C-10 120 10 60 50 30 C80 10 130 5 180 30 C230 55 260 100 280 160 C300 220 310 300 330 380 C345 440 355 510 350 580Z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M200 350 C220 290 250 230 280 160" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M200 350 C170 300 130 260 80 220" fill="none" stroke="currentColor" stroke-width="0.5"/>
+      <path d="M50 30 C100 80 160 150 200 350" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+    <svg class="leaf" style="--r:25deg;--sx:1" viewBox="0 0 400 600">
+      <path d="M350 580 C320 500 280 420 200 350 C130 290 60 260 20 180 C-10 120 10 60 50 30 C80 10 130 5 180 30 C230 55 260 100 280 160 C300 220 310 300 330 380 C345 440 355 510 350 580Z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M50 30 C100 80 160 150 200 350" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+    <svg class="leaf" style="--r:-25deg;--sx:-1" viewBox="0 0 400 600">
+      <path d="M350 580 C320 500 280 420 200 350 C130 290 60 260 20 180 C-10 120 10 60 50 30 C80 10 130 5 180 30 C230 55 260 100 280 160 C300 220 310 300 330 380 C345 440 355 510 350 580Z" fill="none" stroke="currentColor" stroke-width="0.8"/>
+      <path d="M50 30 C100 80 160 150 200 350" fill="none" stroke="currentColor" stroke-width="0.6"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-frame">
+      <!-- Branch decoration -->
+      <div class="hero-branch">
+        <svg viewBox="0 0 80 50">
+          <path d="M5 40 C15 35 25 28 40 25 C50 23 60 20 75 10" stroke="currentColor" fill="none" stroke-width="1"/>
+          <path d="M40 25 C38 18 35 12 30 5" stroke="currentColor" fill="none" stroke-width="0.8"/>
+          <path d="M40 25 C45 18 48 10 48 3" stroke="currentColor" fill="none" stroke-width="0.8"/>
+          <path d="M55 18 C53 12 50 6 45 2" stroke="currentColor" fill="none" stroke-width="0.7"/>
+          <path d="M55 18 C58 12 60 5 58 0" stroke="currentColor" fill="none" stroke-width="0.7"/>
+          <path d="M25 30 C22 25 18 20 12 18" stroke="currentColor" fill="none" stroke-width="0.7"/>
+          <path d="M25 30 C20 28 15 28 10 30" stroke="currentColor" fill="none" stroke-width="0.7"/>
+        </svg>
+      </div>
+      <div class="h-pre">Самара · бьюти-бутик</div>
+      <h1 class="hero-h1">Это Всё Она</h1>
+      <div class="hero-sub">бьюти-бутик</div>
+    </div>
+    <p class="hero-desc">
+      Салон красоты в формате бьюти-бутик. Не только услуги красоты от опытных мастеров, но и невероятная атмосфера роскоши. Работаем только на премиум материалах.
+    </p>
+    <div class="hero-btns">
+      <a href="tel:+79276188887" class="btn btn-gold">Записаться</a>
+      <a href="#services" class="btn btn-ghost">Наши услуги</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>листайте</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="tick-item">Маникюр <span class="tick-dot"></span></div>
+    <div class="tick-item">Педикюр <span class="tick-dot"></span></div>
+    <div class="tick-item">Окрашивание <span class="tick-dot"></span></div>
+    <div class="tick-item">Стрижки <span class="tick-dot"></span></div>
+    <div class="tick-item">Укладки <span class="tick-dot"></span></div>
+    <div class="tick-item">Оформление бровей <span class="tick-dot"></span></div>
+    <div class="tick-item">Макияж <span class="tick-dot"></span></div>
+    <div class="tick-item">Прически <span class="tick-dot"></span></div>
+    <div class="tick-item">Screen <span class="tick-dot"></span></div>
+    <div class="tick-item">Lebel <span class="tick-dot"></span></div>
+    <div class="tick-item">Маникюр <span class="tick-dot"></span></div>
+    <div class="tick-item">Педикюр <span class="tick-dot"></span></div>
+    <div class="tick-item">Окрашивание <span class="tick-dot"></span></div>
+    <div class="tick-item">Стрижки <span class="tick-dot"></span></div>
+    <div class="tick-item">Укладки <span class="tick-dot"></span></div>
+    <div class="tick-item">Оформление бровей <span class="tick-dot"></span></div>
+    <div class="tick-item">Макияж <span class="tick-dot"></span></div>
+    <div class="tick-item">Прически <span class="tick-dot"></span></div>
+    <div class="tick-item">Screen <span class="tick-dot"></span></div>
+    <div class="tick-item">Lebel <span class="tick-dot"></span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<section class="exp-section">
+  <div class="exp-in">
+    <div class="exp-grid">
+      <div class="exp-card r">
+        <div class="exp-num"><span class="counter" data-to="6">0</span><span class="suffix">+</span></div>
+        <div class="exp-label">Опытных мастеров с любовью к своему делу</div>
+      </div>
+      <div class="exp-card r" style="transition-delay:.1s">
+        <div class="exp-num"><span class="counter" data-to="500">0</span><span class="suffix">+</span></div>
+        <div class="exp-label">Довольных гостей, которые возвращаются снова</div>
+      </div>
+      <div class="exp-card r" style="transition-delay:.2s">
+        <div class="exp-num"><span class="counter" data-to="7">0</span><span class="suffix">дней</span></div>
+        <div class="exp-label">Работаем ежедневно без выходных для вас</div>
+      </div>
+      <div class="exp-card r" style="transition-delay:.3s">
+        <div class="exp-num">9<span class="suffix">–21</span></div>
+        <div class="exp-label">Часы работы — удобный график каждый день</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="srv-section" id="services">
+  <div class="srv-in">
+    <div class="srv-header r">
+      <div class="sec-kicker">Услуги</div>
+      <h2 class="sec-h">Всё для вашей <em>красоты</em></h2>
+      <p style="margin-top:1rem;font-size:.85rem;font-weight:300;color:var(--muted);line-height:2">Работаем только на премиум материалах. Каждая процедура — это ритуал заботы и внимания.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card r">
+        <div class="srv-card-n">01</div>
+        <span class="srv-card-icon">💅</span>
+        <div class="srv-card-title">Маникюр & Педикюр</div>
+        <div class="srv-card-desc">Безупречный маникюр и педикюр с премиум покрытием. Уверенность в себе начинается с ухоженных рук.</div>
+      </div>
+      <div class="srv-card r" style="transition-delay:.1s">
+        <div class="srv-card-n">02</div>
+        <span class="srv-card-icon">✨</span>
+        <div class="srv-card-title">Окрашивание волос</div>
+        <div class="srv-card-desc">Трендовое окрашивание на премиальной косметике Screen и Lebel. Ваш идеальный цвет, который держится.</div>
+      </div>
+      <div class="srv-card r" style="transition-delay:.2s">
+        <div class="srv-card-n">03</div>
+        <span class="srv-card-icon">✂️</span>
+        <div class="srv-card-title">Стрижки & Укладки</div>
+        <div class="srv-card-desc">Стильные стрижки и укладки от мастеров, которые чувствуют форму и текстуру волос.</div>
+      </div>
+      <div class="srv-card r" style="transition-delay:.05s">
+        <div class="srv-card-n">04</div>
+        <span class="srv-card-icon">👁️</span>
+        <div class="srv-card-title">Оформление бровей</div>
+        <div class="srv-card-desc">Идеальная форма бровей, которая подчеркнёт вашу индивидуальность и откроет взгляд.</div>
+      </div>
+      <div class="srv-card r" style="transition-delay:.15s">
+        <div class="srv-card-n">05</div>
+        <span class="srv-card-icon">💄</span>
+        <div class="srv-card-title">Макияж</div>
+        <div class="srv-card-desc">Макияж с обложки Vogue — для особого события или просто потому, что вы заслуживаете быть великолепной.</div>
+      </div>
+      <div class="srv-card r" style="transition-delay:.25s">
+        <div class="srv-card-n">06</div>
+        <span class="srv-card-icon">👰</span>
+        <div class="srv-card-title">Причёски</div>
+        <div class="srv-card-desc">Прически для любого мероприятия — от свадьбы до вечеринки. Элегантность в каждой детали.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<div class="brands-band">
+  <div class="brands-track">
+    <span class="brand-item hl">Screen</span>
+    <span class="brand-item">Premium Quality</span>
+    <span class="brand-item hl">Lebel</span>
+    <span class="brand-item">Бьюти-бутик</span>
+    <span class="brand-item hl">Это Всё Она</span>
+    <span class="brand-item">Самара</span>
+    <span class="brand-item hl">Screen</span>
+    <span class="brand-item">Premium Quality</span>
+    <span class="brand-item hl">Lebel</span>
+    <span class="brand-item">Бьюти-бутик</span>
+    <span class="brand-item hl">Это Всё Она</span>
+    <span class="brand-item">Самара</span>
+  </div>
+</div>
+
+<!-- ABOUT / ATMOSPHERE -->
+<section class="atmo-section" id="about">
+  <div class="atmo-in">
+    <div class="atmo-visual rl">
+      <div class="atmo-img">
+        <span class="atmo-emoji">☕</span>
+      </div>
+      <div class="atmo-badge">
+        <div class="atmo-badge-text">Premium</div>
+        <div class="atmo-badge-sub">только лучшее</div>
+      </div>
+    </div>
+    <div class="rr">
+      <div class="sec-kicker">Атмосфера</div>
+      <h2 class="sec-h">Не просто салон —<br><em>пространство</em> для вас</h2>
+      <p class="atmo-text">Мы создали место, где каждая деталь продумана для вашего комфорта. Это не просто визит к мастеру — это время, посвящённое себе.</p>
+      <ul class="atmo-perks">
+        <li class="atmo-perk">
+          <span class="atmo-perk-icon">☕</span>
+          <span class="atmo-perk-text">Ароматный кофе на протяжении всего визита</span>
+        </li>
+        <li class="atmo-perk">
+          <span class="atmo-perk-icon">🍇</span>
+          <span class="atmo-perk-text">Полезные сухофрукты и угощения</span>
+        </li>
+        <li class="atmo-perk">
+          <span class="atmo-perk-icon">🎬</span>
+          <span class="atmo-perk-text">Огромный выбор фильмов для просмотра</span>
+        </li>
+        <li class="atmo-perk">
+          <span class="atmo-perk-icon">🎁</span>
+          <span class="atmo-perk-text">Приятные акции и система лояльности</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section" id="reviews">
+  <div class="testi-in">
+    <div class="testi-header r">
+      <div class="sec-kicker">Отзывы</div>
+      <h2 class="sec-h">Наши гости <em>рекомендуют</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card r">
+        <div class="testi-stars"><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span></div>
+        <p class="testi-text">Потрясающая атмосфера! Пока делали маникюр, наслаждалась кофе и смотрела любимый фильм. Результат идеальный, обязательно вернусь!</p>
+        <div class="testi-author">-- Анна К.</div>
+        <div class="testi-service">Маникюр</div>
+      </div>
+      <div class="testi-card r" style="transition-delay:.1s">
+        <div class="testi-stars"><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span></div>
+        <p class="testi-text">Делала окрашивание на Screen — цвет получился именно такой, как хотела. Мастер подобрала оттенок идеально. Это мой салон!</p>
+        <div class="testi-author">-- Елена М.</div>
+        <div class="testi-service">Окрашивание</div>
+      </div>
+      <div class="testi-card r" style="transition-delay:.2s">
+        <div class="testi-stars"><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span><span class="tstar">&#9733;</span></div>
+        <p class="testi-text">Лучшее оформление бровей в Самаре! Очень аккуратная работа, приятная обстановка. Чувствуешь себя особенной гостьей.</p>
+        <div class="testi-author">-- Дарья В.</div>
+        <div class="testi-service">Оформление бровей</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg">Она</div>
+  <div class="cta-in r">
+    <div class="cta-kicker">Бьюти-бутик</div>
+    <h2 class="cta-h">Подарите себе<br>время <em>красоты</em></h2>
+    <p class="cta-p">Запишитесь прямо сейчас и окунитесь в атмосферу роскоши и заботы. Вы заслуживаете лучшего.</p>
+    <div class="cta-btns">
+      <a href="tel:+79276188887" class="btn btn-gold">Позвонить</a>
+      <a href="https://t.me/Evo_beauty" class="btn btn-ghost" target="_blank">Telegram</a>
+    </div>
+    <div class="cta-phone">
+      <div class="cta-phone-label">Запись по телефону</div>
+      <a href="tel:+79276188887" class="cta-phone-num">+7 (927) 618-88-87</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTS -->
+<section class="contact-section" id="contacts">
+  <div class="contact-in">
+    <div class="contact-info rl">
+      <div class="sec-kicker">Контакты</div>
+      <h2 class="sec-h">Ждём вас<br>в <em>гости</em></h2>
+      <div class="contact-block">
+        <div class="cb-label">Адрес</div>
+        <div class="cb-val">г. Самара, ул. Гастелло, 49</div>
+      </div>
+      <div class="contact-block">
+        <div class="cb-label">Телефон</div>
+        <div class="cb-val"><a href="tel:+79276188887">+7 (927) 618-88-87</a></div>
+      </div>
+      <div class="contact-block">
+        <div class="cb-label">Режим работы</div>
+        <div class="cb-val">Ежедневно с 9:00 до 21:00</div>
+      </div>
+      <div class="contact-socials">
+        <a href="https://t.me/Evo_beauty" target="_blank" class="social-link" title="Telegram">TG</a>
+        <a href="https://vk.com/etovseona_samara" target="_blank" class="social-link" title="ВКонтакте">VK</a>
+      </div>
+    </div>
+    <div class="contact-map rr">
+      <div class="map-frame">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1630.5!2d50.1475!3d53.2!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDEyJzAwLjAiTiA1MMKwMDgnNTEuMCJF!5e0!3m2!1sru!2sru!4v1" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-in">
+    <div class="foot-brand">
+      <div class="fl">Это Всё Она</div>
+      <span class="fs">Бьюти-бутик · Самара</span>
+      <p>Салон красоты в формате бьюти-бутик. Атмосфера роскоши и премиум материалы для каждой гостьи.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Услуги</h4>
+      <p>Маникюр & Педикюр</p>
+      <p>Окрашивание волос</p>
+      <p>Стрижки & Укладки</p>
+      <p>Оформление бровей</p>
+      <p>Макияж & Причёски</p>
+    </div>
+    <div class="foot-col">
+      <h4>Контакты</h4>
+      <a href="tel:+79276188887">+7 (927) 618-88-87</a>
+      <p>ул. Гастелло, 49</p>
+      <p>Ежедневно 9:00–21:00</p>
+      <a href="https://t.me/Evo_beauty" target="_blank">Telegram</a>
+      <a href="https://vk.com/etovseona_samara" target="_blank">ВКонтакте</a>
+    </div>
+  </div>
+  <div class="foot-bot">
+    <p>&copy; 2024&ndash;2026 &middot; Это Всё Она &middot; Бьюти-бутик &middot; Самара</p>
+    <p>Все права защищены</p>
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>80));
+
+// Mobile menu
+const burger=document.getElementById('burger');
+const mobileMenu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow=mobileMenu.classList.contains('open')?'hidden':'';
+});
+function closeMobile(){
+  burger.classList.remove('active');
+  mobileMenu.classList.remove('open');
+  document.body.style.overflow='';
+}
+
+// Counter animation
+const counters=document.querySelectorAll('.counter');
+const countObs=new IntersectionObserver(en=>{
+  en.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,to=+el.dataset.to,dur=1600;
+    let start=null;
+    (function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      el.textContent=Math.floor(p*to);
+      if(p<1)requestAnimationFrame(step);
+      else el.textContent=to;
+    })(performance.now());
+    countObs.unobserve(el);
+  });
+},{threshold:.5});
+counters.forEach(c=>countObs.observe(c));
+
+// Reveal on scroll
+const obs=new IntersectionObserver(en=>{en.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')})},{threshold:.1});
+document.querySelectorAll('.r,.rl,.rr').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
